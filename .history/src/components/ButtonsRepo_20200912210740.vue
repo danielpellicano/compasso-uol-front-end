@@ -1,16 +1,11 @@
 <template>
   <ul class="btns">
     <li>
-      <button :click="userRepoGet">
+      <button v-on:click="userRepoGet">
         <i class="fa fa-user-plus"></i>User Repos
       </button>
     </li>
-    <li>
-      <button :click="userStarredGet">
-        <i class="fa fa-star"></i>Starred Repos
-      </button>
-    </li>
-    <h3>{{ userRepo }}</h3>
+    <li><i class="fa fa-star"></i>Starred Repos</li>
   </ul>
 </template>
 
@@ -19,20 +14,13 @@ export default {
   name: "ButtonsRepo",
   data() {
     return {
-      userRepo: "123",
+      userRepo: "",
       userStarred: "",
     };
   },
-  mounted: function() {
-    this.userRepoGet();
-  },
   methods: {
     userRepoGet() {
-      this.userRepo = this.$attrs.userRepo;
-      console.log(this.userRepo);
-    },
-    userStarredGet() {
-      alert("starred");
+      alert("teste");
     },
   },
 };
@@ -47,7 +35,9 @@ ul {
 }
 ul li {
   display: inline-block;
+  padding: 10px 30px;
   border: 1px solid #fff;
+  cursor: pointer;
   transition: all 0.3s ease-out;
 }
 ul li:hover {
@@ -65,7 +55,6 @@ ul li button {
   border: 0;
   color: #fff;
   font-size: 14px;
-  cursor: pointer;
 }
 
 ul li i {

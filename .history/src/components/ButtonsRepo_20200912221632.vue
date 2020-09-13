@@ -24,7 +24,7 @@ export default {
     };
   },
   mounted: function() {
-    this.userRepoGet();
+    userRepoGet();
   },
   methods: {
     userRepoGet() {

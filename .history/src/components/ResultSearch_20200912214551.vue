@@ -20,7 +20,7 @@
           >
         </div>
         {{ results.message }}
-        <buttons-repo :userRepo="userRepo" />
+        <buttons-repo @userRepoGet="userRepoGet" />
       </div>
     </div>
   </div>
@@ -49,6 +49,7 @@ export default {
           console.log(r);
           self.results = r;
           this.userRepo = this.results.repos_url;
+          this.$emit("userRepo", this.userRepo);
         });
     },
   },

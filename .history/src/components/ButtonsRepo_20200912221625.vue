@@ -23,9 +23,7 @@ export default {
       userStarred: "",
     };
   },
-  mounted: function() {
-    this.userRepoGet();
-  },
+  mounted: function() {},
   methods: {
     userRepoGet() {
       this.userRepo = this.$attrs.userRepo;

@@ -1,7 +1,7 @@
 <template>
   <ul class="btns">
     <li>
-      <button :click="userRepoGet">
+      <button :userRepo="userRepoGet">
         <i class="fa fa-user-plus"></i>User Repos
       </button>
     </li>
@@ -10,7 +10,6 @@
         <i class="fa fa-star"></i>Starred Repos
       </button>
     </li>
-    <h3>{{ userRepo }}</h3>
   </ul>
 </template>
 
@@ -23,13 +22,10 @@ export default {
       userStarred: "",
     };
   },
-  mounted: function() {
-    this.userRepoGet();
-  },
   methods: {
     userRepoGet() {
-      this.userRepo = this.$attrs.userRepo;
-      console.log(this.userRepo);
+      alert("user repo");
+      this.userRepo = this.$emit("getUrlRepo");
     },
     userStarredGet() {
       alert("starred");

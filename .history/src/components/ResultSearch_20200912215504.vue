@@ -20,7 +20,7 @@
           >
         </div>
         {{ results.message }}
-        <buttons-repo :userRepo="userRepo" />
+        <buttons-repo />
       </div>
     </div>
   </div>
@@ -55,6 +55,9 @@ export default {
   watch: {
     countSearch() {
       this.queryGitHub(this.query);
+    },
+    userRepo() {
+      this.$emit("userRepo", this.userRepo);
     },
   },
 };

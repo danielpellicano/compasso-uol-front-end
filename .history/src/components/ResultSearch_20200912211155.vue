@@ -20,7 +20,7 @@
           >
         </div>
         {{ results.message }}
-        <buttons-repo :userRepo="userRepo" />
+        <buttons-repo />
       </div>
     </div>
   </div>
@@ -35,6 +35,7 @@ export default {
   props: ["query", "countSearch", "userRepo"],
   data() {
     return {
+      msg: "GitHub Search",
       results: null,
     };
   },
@@ -48,7 +49,6 @@ export default {
         .then((r) => {
           console.log(r);
           self.results = r;
-          this.userRepo = this.results.repos_url;
         });
     },
   },

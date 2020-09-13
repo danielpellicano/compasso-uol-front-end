@@ -20,7 +20,7 @@
           >
         </div>
         {{ results.message }}
-        <buttons-repo :userRepo="userRepo" />
+        <buttons-repo @userRepoGet="userRepoGet" />
       </div>
     </div>
   </div>

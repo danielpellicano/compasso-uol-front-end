@@ -20,7 +20,7 @@
           >
         </div>
         {{ results.message }}
-        <buttons-repo :userRepo="userRepo" />
+        <buttons-repo v-model="userRepo" />
       </div>
     </div>
   </div>

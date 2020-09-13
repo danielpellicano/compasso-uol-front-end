@@ -10,7 +10,6 @@
         <i class="fa fa-star"></i>Starred Repos
       </button>
     </li>
-    <h3>{{ userRepo }}</h3>
   </ul>
 </template>
 
@@ -23,12 +22,9 @@ export default {
       userStarred: "",
     };
   },
-  mounted: function() {
-    this.userRepoGet();
-  },
+  mounted: function() {},
   methods: {
     userRepoGet() {
-      this.userRepo = this.$attrs.userRepo;
       console.log(this.userRepo);
     },
     userStarredGet() {
