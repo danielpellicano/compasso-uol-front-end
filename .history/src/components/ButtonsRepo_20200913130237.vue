@@ -2,12 +2,12 @@
   <div>
   <ul class="btns">
       <li>  
-        <button @click="userRepoGet(); showRepoUser = true">
+        <button @click="userRepoGet(); showRepo = true">
         <i class="fa fa-user-plus"></i>User Repos
       </button>
       </li>
     <li>
-      <button @click="userStarredGet(); showRepoStarred = true">
+      <button @click="userStarredGet">
         <i class="fa fa-star"></i>Starred Repos
       </button>
     </li>
@@ -40,9 +40,8 @@ export default {
       showRepoUser: false,
       showRepoStarred: false,
       userRepoUrl: "",
-      starredRepoUrl: "",
       userRepoData: [],
-      userStarredData: [],
+      userStarred: "",
       count: 0,
     };
   },
@@ -51,6 +50,7 @@ export default {
   },
   methods: {
     userRepoGet() {
+      console.log('123')
       this.userRepoUrl = this.$attrs.userRepo;
       fetch(this.userRepoUrl)
         .then((j) => {
@@ -62,16 +62,7 @@ export default {
         });
     },
     userStarredGet() {
-      this.starredRepoUrl = this.$attrs.starredRepo;
-      fetch(this.starredRepoUrl)
-        .then((j) => {
-          return j.json();
-        })
-        .then((r) => {
-          this.userStarredData = r;
-          
-          console.log(r);
-        });
+      alert("starred");
     },
   },
 };

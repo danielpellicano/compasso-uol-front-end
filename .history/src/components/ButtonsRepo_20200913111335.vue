@@ -1,33 +1,22 @@
 <template>
   <div>
   <ul class="btns">
-      <li>  
-        <button @click="userRepoGet(); showRepoUser = true">
+    <li>
+      <button :click="userRepoGet">
         <i class="fa fa-user-plus"></i>User Repos
       </button>
-      </li>
+    </li>
     <li>
-      <button @click="userStarredGet(); showRepoStarred = true">
+      <button :click="userStarredGet">
         <i class="fa fa-star"></i>Starred Repos
       </button>
     </li>
   </ul>
 
-<div class="userRepo" v-if="showRepoUser">
-  <h3>User Repo</h3>
-  <ul class="listRepo">
+  <ul class="listRepo" v-if="userRepoData">
     <li v-for="item in userRepoData" :key="item.name">
       <a :href="item.html_url">{{item.name}}</a></li>
   </ul>
-</div>
-
-<div class="starredRepo" v-if="showRepoStarred">
-    <h3>Starred Repo</h3>
- <ul class="listRepo">
-    <li v-for="item in userStarredData" :key="item.name">
-      <a :href="item.html_url">{{item.name}}</a></li>
-  </ul>
-</div>
 
   </div>
 </template>
@@ -37,17 +26,13 @@ export default {
   name: "ButtonsRepo",
   data() {
     return {
-      showRepoUser: false,
-      showRepoStarred: false,
       userRepoUrl: "",
-      starredRepoUrl: "",
       userRepoData: [],
-      userStarredData: [],
-      count: 0,
+      userStarred: "",
     };
   },
-  created: function() {
-    /*this.userRepoGet();*/
+  mounted: function() {
+    this.userRepoGet();
   },
   methods: {
     userRepoGet() {
@@ -62,16 +47,7 @@ export default {
         });
     },
     userStarredGet() {
-      this.starredRepoUrl = this.$attrs.starredRepo;
-      fetch(this.starredRepoUrl)
-        .then((j) => {
-          return j.json();
-        })
-        .then((r) => {
-          this.userStarredData = r;
-          
-          console.log(r);
-        });
+      alert("starred");
     },
   },
 };
@@ -117,17 +93,12 @@ ul li i {
 
 .listRepo li {
   border:0;
-  width: 100%;
 }
 
 .listRepo li a {
   color:#fff;
   text-decoration:none;
-  background:url("../assets/img/list-arrow.png") no-repeat 5px;
-  background-size:10px;
-  padding-left:20px;
-  padding:7px 20px;
-  display:block;
+  background:url("../assets/img/list-arrow.png") no-repeat;
 }
 
 </style>

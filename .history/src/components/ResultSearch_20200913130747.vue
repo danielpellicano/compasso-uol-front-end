@@ -20,7 +20,7 @@
           >
         </div>
         {{ results.message }}
-        <buttons-repo :userRepo="userRepo" :starredRepo="starredRepo" />
+        <buttons-repo :userRepo="userRepo" />
       </div>
     </div>
   </div>

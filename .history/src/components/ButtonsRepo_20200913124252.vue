@@ -1,19 +1,19 @@
 <template>
   <div>
   <ul class="btns">
-      <li>  
-        <button @click="userRepoGet(); showRepoUser = true">
+    <li>
+      <button @click="count++">
         <i class="fa fa-user-plus"></i>User Repos
       </button>
-      </li>
+    </li>
     <li>
-      <button @click="userStarredGet(); showRepoStarred = true">
+      <button :click="userStarredGet">
         <i class="fa fa-star"></i>Starred Repos
       </button>
     </li>
   </ul>
 
-<div class="userRepo" v-if="showRepoUser">
+<div class="userRepo">
   <h3>User Repo</h3>
   <ul class="listRepo">
     <li v-for="item in userRepoData" :key="item.name">
@@ -21,7 +21,7 @@
   </ul>
 </div>
 
-<div class="starredRepo" v-if="showRepoStarred">
+<div class="starredRepo">
     <h3>Starred Repo</h3>
  <ul class="listRepo">
     <li v-for="item in userStarredData" :key="item.name">
@@ -37,20 +37,20 @@ export default {
   name: "ButtonsRepo",
   data() {
     return {
-      showRepoUser: false,
-      showRepoStarred: false,
+      showRepo: false,
       userRepoUrl: "",
-      starredRepoUrl: "",
       userRepoData: [],
-      userStarredData: [],
+      userStarred: "",
       count: 0,
     };
   },
   created: function() {
-    /*this.userRepoGet();*/
+    this.userRepoGet();
   },
   methods: {
     userRepoGet() {
+      alert('teste');
+      console.log('123')
       this.userRepoUrl = this.$attrs.userRepo;
       fetch(this.userRepoUrl)
         .then((j) => {
@@ -62,16 +62,7 @@ export default {
         });
     },
     userStarredGet() {
-      this.starredRepoUrl = this.$attrs.starredRepo;
-      fetch(this.starredRepoUrl)
-        .then((j) => {
-          return j.json();
-        })
-        .then((r) => {
-          this.userStarredData = r;
-          
-          console.log(r);
-        });
+      alert("starred");
     },
   },
 };

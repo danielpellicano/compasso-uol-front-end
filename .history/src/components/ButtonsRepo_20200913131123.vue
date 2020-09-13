@@ -7,7 +7,7 @@
       </button>
       </li>
     <li>
-      <button @click="userStarredGet(); showRepoStarred = true">
+      <button @click="userStarredGet">
         <i class="fa fa-star"></i>Starred Repos
       </button>
     </li>
@@ -69,7 +69,6 @@ export default {
         })
         .then((r) => {
           this.userStarredData = r;
-          
           console.log(r);
         });
     },

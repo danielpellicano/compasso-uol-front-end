@@ -20,7 +20,7 @@
           >
         </div>
         {{ results.message }}
-        <buttons-repo :userRepo="userRepo" :starredRepo="starredRepo" />
+        <buttons-repo :userRepo="userRepo" />
       </div>
     </div>
   </div>
@@ -32,10 +32,11 @@ import ButtonsRepo from "./ButtonsRepo.vue";
 export default {
   name: "ResultSearch",
   components: { ButtonsRepo },
-  props: ["query", "countSearch", "userRepo", "starredRepo"],
+  props: ["query", "countSearch", "userRepo"],
   data() {
     return {
       results: null,
+      userRepositorio: this.userRepo,
     };
   },
   methods: {
@@ -48,8 +49,8 @@ export default {
         .then((r) => {
           console.log(r);
           self.results = r;
-          this.userRepo = this.results.repos_url;
-          this.starredRepo = this.results.starred_url;
+          this.userRepositorio = this.results.repos_url;
+          this.userRepositorio = this.userRepo;
         });
     },
   },
@@ -104,7 +105,7 @@ i {
 
 .img-block {
   display: flex;
-  align-items:baseline;
+  align-items: end;
 }
 a {
   color: #fff;
