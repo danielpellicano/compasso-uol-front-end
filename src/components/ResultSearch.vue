@@ -1,12 +1,20 @@
 <template>
-  <div class="page-results">
+  <div class="page-results" v-if="results">
     <!--<form v-on:submit.prevent="queryGitHub(query)">
       <input type="text" placeholder="User Github..." v-model="query" />
       <input type="submit" value="Search" />
     </form>-->
-    <div class="results" v-if="results">
+    <div
+      class="results"
+      v-if="
+        (!lodash.has(results, 'message') && select == 'user') || select == ''
+      "
+    >
       <div class="img-block">
-        <img v-if="results.avatar_url" v-bind:src="results.avatar_url" />
+        <img
+          v-if="lodash.has(results, 'avatar_url')"
+          v-bind:src="results.avatar_url"
+        />
       </div>
       <div class="info-block">
         <h2>{{ results.name }}</h2>
@@ -23,41 +31,65 @@
         <buttons-repo :userRepo="userRepo" :starredRepo="starredRepo" />
       </div>
     </div>
+    <div v-else-if="select == 'repo'">
+      <pre>
+        {{ results.items }}
+      </pre>
+    </div>
+    <div class="not-found" v-else>
+      <h3>Usuário não encontrado</h3>
+      <p>Por favor faça uma nova busca</p>
+    </div>
   </div>
 </template>
 
 <script>
-import ButtonsRepo from "./ButtonsRepo.vue";
-
+import ButtonsRepo from './ButtonsRepo.vue';
+import lodash from 'lodash';
 export default {
-  name: "ResultSearch",
+  name: 'ResultSearch',
   components: { ButtonsRepo },
-  props: ["query", "countSearch", "userRepo", "starredRepo"],
+  props: ['query', 'countSearch', 'select'],
   data() {
     return {
       results: null,
+      userRepo: null,
+      starredRepo: null,
+      lodash: lodash,
     };
+  },
+  mounted() {
+    if (typeof this.$route.params.slug !== 'undefined') {
+      this.queryGitHub(this.$route.params.slug);
+    }
   },
   methods: {
     queryGitHub(q) {
       let self = this;
-      fetch("https://api.github.com/users/" + q)
-        .then((j) => {
-          return j.json();
-        })
-        .then((r) => {
-          console.log(r);
-          self.results = r;
-          this.userRepo = this.results.repos_url;
-          this.starredRepo = this.results.starred_url;
-        });
+      if (this.select == '' || this.select == 'user') {
+        fetch('https://api.github.com/users/' + q)
+          .then(j => {
+            return j.json();
+          })
+          .then(r => {
+            self.results = r;
+            this.userRepo = this.results.repos_url;
+            let starred_url = this.results.starred_url;
+            starred_url = starred_url.split('{/owner}{/repo}')[0];
+            this.starredRepo = starred_url;
+          });
+      } else {
+        fetch('https://api.github.com/search/repositories?q=' + q)
+          .then(j => {
+            return j.json();
+          })
+          .then(r => {
+            self.results = r;
+          });
+      }
     },
   },
-  watch: {
-    countSearch() {
-      this.queryGitHub(this.query);
-    },
-  },
+  watch: {},
 };
 </script>
 
@@ -104,9 +136,31 @@ i {
 
 .img-block {
   display: flex;
-  align-items:baseline;
+  align-items: baseline;
 }
 a {
   color: #fff;
+}
+
+.not-found {
+  padding: 30px 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .results {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .img-block {
+    justify-content: center;
+  }
+
+  .results .info-block {
+    padding-left: 0;
+  }
 }
 </style>
