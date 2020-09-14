@@ -1,5 +1,8 @@
 <template>
-  <div class="page-results" v-if="results">
+  <div
+    class="page-results animate__animated animate__backInLeft"
+    v-if="results"
+  >
     <!--<form v-on:submit.prevent="queryGitHub(query)">
       <input type="text" placeholder="User Github..." v-model="query" />
       <input type="submit" value="Search" />
@@ -32,9 +35,11 @@
       </div>
     </div>
     <div v-else-if="select == 'repo'">
-      <pre>
-        {{ results.items }}
-      </pre>
+      <ul class="list-starred">
+        <li v-for="item in results['items']" :key="item.name">
+          <a :href="item.url" target="_blank">{{ item.name }}</a>
+        </li>
+      </ul>
     </div>
     <div class="not-found" v-else>
       <h3>Usuário não encontrado</h3>
@@ -85,6 +90,7 @@ export default {
           })
           .then(r => {
             self.results = r;
+            console.log(r);
           });
       }
     },
@@ -144,6 +150,29 @@ a {
 
 .not-found {
   padding: 30px 10px;
+}
+
+.list-starred {
+  list-style: none;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 20px;
+}
+
+.list-starred li {
+  background: url('../assets/img/list-arrow.png') no-repeat 5px;
+  background-size: 10px;
+  padding-left: 20px;
+  margin-bottom: 7px;
+}
+
+.list-starred li a {
+  text-decoration: none;
+}
+
+.list-starred li a:hover {
+  color: #f7b718;
 }
 
 @media only screen and (max-width: 600px) {

@@ -25,7 +25,10 @@
       </li>
     </ul>
 
-    <div class="userRepo" v-if="showRepoUser">
+    <div
+      class="userRepo animate__animated animate__bounceIn"
+      v-if="showRepoUser"
+    >
       <h3>User Repo</h3>
       <ul class="listRepo">
         <li v-for="item in userRepoData" :key="item.name">
@@ -34,7 +37,10 @@
       </ul>
     </div>
 
-    <div class="starredRepo" v-if="showRepoStarred">
+    <div
+      class="starredRepo animate__animated animate__bounceIn"
+      v-if="showRepoStarred"
+    >
       <h3>Starred Repo</h3>
       <ul class="listRepo">
         <li v-for="item in userStarredData" :key="item.name">

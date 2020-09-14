@@ -1,9 +1,13 @@
 <template>
-  <form v-on:submit.prevent="queryGitHub" id="form">
+  <form
+    v-on:submit.prevent="queryGitHub"
+    id="form"
+    class="animate__animated animate__backInRight"
+  >
     <select v-model="selected">
       <option disabled value="">Escolha um item</option>
-      <option value="repo">Reposit</option>
-      <option value="user">User</option>
+      <option value="repo">Repositories</option>
+      <option value="user">Users</option>
     </select>
     <input type="text" placeholder="User Github..." v-model="query" />
     <input type="submit" value="Search User" />

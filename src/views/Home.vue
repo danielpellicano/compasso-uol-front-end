@@ -2,7 +2,7 @@
   <div id="app" class="home">
     <div class="content">
       <img
-        class="logo"
+        class="logo animate__animated animate__bounce"
         alt="Uol Compasso"
         :src="require('../assets/img/uol-compasso.svg')"
         width="500"
@@ -55,6 +55,7 @@ export default {
 body {
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 footer {
@@ -87,52 +88,5 @@ footer {
   max-width: 100%;
   padding: 20px;
   box-sizing: border-box;
-}
-
-@media only screen and (max-width: 600px) {
-  .results {
-    width: 100%;
-    max-width: 600px;
-    display: block;
-    text-align: center;
-  }
-
-  .img-block {
-    justify-content: center;
-  }
-
-  .results .info-block {
-    padding-left: 0;
-  }
-
-  form {
-    padding: 12px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  form select {
-    padding: 10px;
-    margin-right: 0;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-  }
-
-  form input[type='text'] {
-    padding: 10px;
-    width: 100% !important;
-    outline: none;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-  }
-  form input[type='submit'][data-v-32159c42] {
-    background: #231f20 url(/img/search.00ec8028.svg) no-repeat 94%;
-    background-size: 15px;
-    color: #fff;
-    padding: 10px 50px 10px 30px;
-    border-radius: 0;
-    width: 100%;
-  }
 }
 </style>
