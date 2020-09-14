@@ -49,7 +49,7 @@ export default {
       if (this.selected) {
         this.$emit('countSearch', this.countSearch + 2);
       } else {
-        alert('Selecione o que vocÊ quer pesquisar');
+        alert('Selecione o que você quer pesquisar');
       }
     },
   },
